@@ -12,14 +12,9 @@ Este projeto foi construido para armazenar as configurações da arquitetura para 
 
 Para compilar o projeto rode o seguinte comando:
 
-``
-gradle clean build
 
-```
+`gradle clean build`
 
 Para publicar o projeto como uma biblioteca no repositório local do maven rode o seguinte comando:
 
-``
-gradle publishToMavenLocal
-
-```
+`gradle publishToMavenLocal`

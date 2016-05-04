@@ -39,7 +39,14 @@ public class AuthorizationUtils {
 	}
 	
 	private Claims getClaims(String token){
-		return new JWTUtils(key).parse(token);
+		Claims claims = null;
+		try {
+			claims = new JWTUtils(key).parse(token);
+		} catch (Exception e) {
+			throw new AuthHeaderNotFoundException("Token inválido, não foi possível ler o token");
+		}
+		
+		return claims;
 	}
 
 	private boolean isBearerToken(String authHeader) {

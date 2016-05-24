@@ -18,4 +18,5 @@ public class BeanConfig {
 	public Properties properties(){
 		return new Properties();
 	}
+	
 }

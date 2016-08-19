@@ -7,9 +7,13 @@ import javax.sql.DataSource;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MultiTenantProvider implements MultiTenantConnectionProvider{
 	private static final long serialVersionUID = 1L;
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private DataSource dataSource;
 	
@@ -48,6 +52,7 @@ public class MultiTenantProvider implements MultiTenantConnectionProvider{
 		
 		try {
 			connection.createStatement().execute("SET SCHEMA '" + tenantIdentifier + "'");
+			log.info("SET SCHEMA '" + tenantIdentifier + "'");
 		} catch (SQLException e) {
 			throw new HibernateException("Could not alter JDBC connection to specified schema [" + tenantIdentifier + "]", e);
 		}

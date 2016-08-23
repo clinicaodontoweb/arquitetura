@@ -51,7 +51,6 @@ public class JWTAuthorizationUtil {
 	private void validaClaims(Claims claims) throws AuthHeaderNotFoundException{
 		if(claims.getSubject() == null || claims.getSubject() == "") throw new AuthHeaderNotFoundException("Invalid token");
 		if((String)claims.get("tenant") == null || (String)claims.get("tenant") == "") throw new AuthHeaderNotFoundException("Invalid token, tenant not found");
-		if((String)claims.get("roles") == null || (String)claims.get("roles") == "") throw new AuthHeaderNotFoundException("Invalid token, roles not found");
 		if(claims.getIssuedAt() == null) throw new AuthHeaderNotFoundException("Invalid token, expire date not found");
 		if(!validateExpireDate(claims.getIssuedAt())) throw new AuthHeaderNotFoundException("Token has expired");
 	}

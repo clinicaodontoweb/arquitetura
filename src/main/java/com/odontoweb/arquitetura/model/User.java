@@ -1,12 +1,16 @@
 package com.odontoweb.arquitetura.model;
 
-public class User {
-	
+import java.io.Serializable;
+import java.util.List;
+
+public class User implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	private String username;
 	private String tenant;
-	private String roles;
+	private List<String> roles;
 	
-	public User(String username, String tenant, String roles) {
+	public User(String username, String tenant, List<String> roles) {
 		this.username = username;
 		this.tenant = tenant;
 		this.roles = roles;
@@ -23,10 +27,10 @@ public class User {
 	public void setTenant(String tenant) {
 		this.tenant = tenant;
 	}
-	public String getRoles() {
+	public List<String> getRoles() {
 		return roles;
 	}
-	public void setRoles(String roles) {
+	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
 	

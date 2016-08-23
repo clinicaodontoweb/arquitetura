@@ -3,6 +3,7 @@ package com.odontoweb.arquitetura.security;
 import io.jsonwebtoken.Claims;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 	private JWTAuthorizationUtil jwtUtil;
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
 		
@@ -34,9 +36,17 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 		
 		if(authToken != null && authToken != "" && SecurityContextHolder.getContext().getAuthentication() == null){
 			Claims claims = jwtUtil.getClaimsFromToken(authToken);
-			User user = new User(claims.getSubject(), claims.get("tenant", String.class), claims.get("roles", String.class));
+			User user = new User(claims.getSubject(), claims.get("tenant", String.class), claims.get("roles", ArrayList.class));
+			
 			RequestContextHolder.currentRequestAttributes().setAttribute("CURRENT_TENANT_IDENTIFIER", user.getTenant(), RequestAttributes.SCOPE_REQUEST);
-			SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user, null, AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRoles())));
+			SecurityContextHolder
+				.getContext()
+				.setAuthentication(
+						new UsernamePasswordAuthenticationToken(
+								user, 
+								null, 
+								AuthorityUtils.createAuthorityList(
+										user.getRoles().toArray(new String[user.getRoles().size()]))));
 		}
 		
 		chain.doFilter(req, res);

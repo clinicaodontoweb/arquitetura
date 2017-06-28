@@ -1,4 +1,4 @@
-package com.odontoweb.arquitetura.config;
+package com.odontoweb.arquitetura.multitenant.config;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

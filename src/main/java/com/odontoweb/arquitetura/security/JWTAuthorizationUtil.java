@@ -23,9 +23,11 @@ public class JWTAuthorizationUtil {
     public String build(User user) {
         return Jwts.builder().setHeaderParam("type", "JWT")
                 .setSubject(user.getUsername())
-                .claim("tenant", user.getTenant())
-                .claim("roles", user.getRoles())
-                .setIssuedAt(new Date())
+				.claim("tenant", user.getTenant())
+				.claim("isAdmin", user.getAdmin())
+				.claim("tipoUsuario", user.getTipoUsuario())
+				.claim("roles", user.getRoles())
+				.setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS512, TextCodec.BASE64.encode(key.getBytes()))
                 .compact();
     }

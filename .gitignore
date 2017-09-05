@@ -6,3 +6,6 @@
 bin/
 build/
 classes/
+.idea/
+arquitetura.iml
+src/main/main.iml

@@ -36,7 +36,7 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 		
 		if(authToken != null && authToken != "" && SecurityContextHolder.getContext().getAuthentication() == null){
 			Claims claims = jwtUtil.getClaimsFromToken(authToken);
-			User user = new User(claims.getSubject(), claims.get("tenant", String.class), claims.get("roles", ArrayList.class));
+			User user = new User(claims.getSubject(), claims.get("tenant", String.class), claims.get("tipoUsuario", String.class), claims.get("isAdmin", Boolean.class), claims.get("roles", ArrayList.class));
 			
 			RequestContextHolder.currentRequestAttributes().setAttribute("CURRENT_TENANT_IDENTIFIER", user.getTenant(), RequestAttributes.SCOPE_REQUEST);
 			SecurityContextHolder

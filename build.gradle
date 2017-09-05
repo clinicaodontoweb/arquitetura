@@ -39,11 +39,11 @@ jar {
 }
 
 publishing {
-	repositories {
+	/*repositories {
 	    maven {
 	        url manveUrlWrite
 	    }
-	}
+	}*/
     publications {
         mavenJava(MavenPublication) {
         	groupId 'com.odontoweb.microservices'

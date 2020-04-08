@@ -36,7 +36,7 @@ public class MultiTenatConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
 		Map<String, Object> hibernateProps = new LinkedHashMap<>();
 		
-		hibernateProps.putAll(jpaProperties.getHibernateProperties(dataSource));
+		hibernateProps.putAll(jpaProperties.getProperties());
 
 		hibernateProps.put(Environment.FORMAT_SQL, true);
 		hibernateProps.put(Environment.MULTI_TENANT, MultiTenancyStrategy.SCHEMA);
